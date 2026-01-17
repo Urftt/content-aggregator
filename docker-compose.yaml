@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: content-aggregator-db
+    environment:
+      POSTGRES_USER: content_user
+      POSTGRES_PASSWORD: content_pass
+      POSTGRES_DB: content_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  n8n:
+    image: n8nio/n8n
+    container_name: n8n
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_SECURE_COOKIE=false
+    volumes:
+      - ~/.n8n:/home/node/.n8n
+      - /Users/luckleineschaars/Repos/content-aggregator:/data/content-aggregator
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
