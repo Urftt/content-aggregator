@@ -5,10 +5,11 @@ Personal content aggregator to combat doomscrolling. Collects content from YouTu
 
 ## Current State
 - PostgreSQL database is set up and running in Docker
-- Currently using n8n workflows for YouTube collection
-- **Transitioning to pure Python** - this is the main development focus
-- Viewer exists (viewer.py) but may be in early stages
-- No Python collectors built yet (collectors/youtube.py planned but not created)
+- ✅ **Python YouTube collector is built and working** (collectors/youtube.py)
+- Collecting from 8 configured YouTube channels via channels.yaml
+- n8n workflows can now be deprecated
+- Streamlit viewer is functional (viewer.py)
+- All credentials moved to environment variables (.env)
 
 ## Development Priorities
 1. Build Python-based collectors to replace n8n
@@ -85,9 +86,11 @@ Better for concurrent access, originally chosen for n8n compatibility, good for 
 - Docker management: docker-compose commands for postgres/n8n
 
 ## Project Structure Notes
-- `/collectors/` - Future home of Python collection scripts (not built yet)
-- `/viewer/` - Streamlit app (planned structure, viewer.py exists in root currently)
+- `/collectors/` - Python collection scripts (youtube.py is complete and working)
+- `channels.yaml` - YouTube channel configuration (8 channels currently configured)
+- `.env` - Environment variables (API keys, DB credentials) - NOT committed to git
+- `.env.example` - Template for environment variables
 - `setup_postgres.py` - Database initialization, reference for schema
-- `viewer.py` - Current viewer implementation (structure may evolve)
+- `viewer.py` - Streamlit viewer implementation (functional)
 
 UPDATE THIS FILE AND OTHER DOCS. THESE ARE LIVING DOCUMENTS.
