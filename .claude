@@ -1,0 +1,93 @@
+# Content Aggregator - Claude Context
+
+## Project Purpose
+Personal content aggregator to combat doomscrolling. Collects content from YouTube, RSS, and podcasts without algorithmic manipulation.
+
+## Current State
+- PostgreSQL database is set up and running in Docker
+- Currently using n8n workflows for YouTube collection
+- **Transitioning to pure Python** - this is the main development focus
+- Viewer exists (viewer.py) but may be in early stages
+- No Python collectors built yet (collectors/youtube.py planned but not created)
+
+## Development Priorities
+1. Build Python-based collectors to replace n8n
+2. Build/improve the Streamlit viewer
+3. Keep it simple - resist over-engineering
+
+## Code Preferences
+
+### Style
+- When communicating in chat give options and recommendations
+- PEP8 compliant
+- Type hints encouraged
+- Keep functions focused and simple
+- Avoid premature abstractions
+- AVOID BLOATED CODE. I know how you are. You create tons of code in seconds, but please keep it clean, consice and maintainable. 
+
+### Database
+- Use psycopg2 for PostgreSQL connections
+- Connection details from environment variables (.env)
+- Schema is in setup_postgres.py - check there for table structure
+
+### Content Schema
+```
+content table:
+- id, title, url (unique), source_type, source_name
+- description, thumbnail, published_at, collected_at
+- consumed (boolean), score (int), estimated_duration (int)
+```
+
+## Important Context
+
+### Why PostgreSQL over SQLite?
+Better for concurrent access, originally chosen for n8n compatibility, good for expansion.
+
+### Why transitioning from n8n to Python?
+- n8n workflows are click-heavy and hard to version control
+- Need more flexibility for filtering/scoring logic
+- Easier to customize and extend in Python
+- Better for future ML integration
+
+### Filtering Philosophy
+- Quality over quantity - better to miss content than get overwhelmed
+- User chooses sources, not an algorithm
+- Specific filtering criteria TBD (to be defined later)
+- Will filter out YouTube shorts, clickbait (exact rules coming)
+
+## Things to Remember
+- Python 3.13+ is the target version
+- Use `uv` for package management (not pip)
+- PostgreSQL runs in Docker (docker-compose.yaml)
+- Environment variables in .env (not committed)
+- Keep the "anti-doomscroll" focus in mind
+
+## When Helping Me
+
+### Do:
+- Keep solutions simple and focused
+- Check existing code patterns before suggesting new ones
+- Consider the "no algorithm manipulation" philosophy
+- Use type hints in new code
+- Validate at system boundaries (user input, external APIs)
+
+### Don't:
+- Over-engineer solutions
+- Add features I didn't ask for
+- Create unnecessary abstractions
+- Add comments for obvious code
+- Design for hypothetical future requirements
+
+## Common Tasks
+- Database queries: Use docker exec to connect to PostgreSQL
+- Adding dependencies: `uv add package-name`
+- Running scripts: `uv run python script.py`
+- Docker management: docker-compose commands for postgres/n8n
+
+## Project Structure Notes
+- `/collectors/` - Future home of Python collection scripts (not built yet)
+- `/viewer/` - Streamlit app (planned structure, viewer.py exists in root currently)
+- `setup_postgres.py` - Database initialization, reference for schema
+- `viewer.py` - Current viewer implementation (structure may evolve)
+
+UPDATE THIS FILE AND OTHER DOCS. THESE ARE LIVING DOCUMENTS.
