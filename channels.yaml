@@ -1,24 +1,9 @@
 channels:
-  - id: UCj1VqrHhDte54oLgPG4xpuQ
-    name: Stuff Made Here
-
-  - id: UCC76FBg2d-5NWFD8aK4ql5A
-    name: Carl Rogers
-
-  - id: UCHnyfMqiRRG1u-2MsSQLbXA
-    name: Veritasium
-
-  - id: UCjwCWy9HCWhbNJav0Sj2Cmg
-    name: Satoshi Radio
-
-  - id: UCr3Lrf7n3h3XGjkxTOSRMCA
-    name: Average Rob
-
-  - id: UCp68_FLety0O-n9QU6phsgw
-    name: Colin Furze
-
-  - id: UC0k1SRsGd6THnCvsMulf2YA
-    name: Unibet Rose Rockets (Tour de Tietema)
-
-  - id: UC6I0KzAD7uFTL1qzxyunkvA
-    name: Blacktail Studio
+  - UCj1VqrHhDte54oLgPG4xpuQ  # Stuff Made Here
+  - UCC76FBg2d-5NWFD8aK4ql5A  # Carl Rogers
+  - UCHnyfMqiRRG1u-2MsSQLbXA  # Veritasium
+  - UCjwCWy9HCWhbNJav0Sj2Cmg  # Satoshi Radio
+  - UCr3Lrf7n3h3XGjkxTOSRMCA  # Average Rob
+  - UCp68_FLety0O-n9QU6phsgw  # Colin Furze
+  - UC0k1SRsGd6THnCvsMulf2YA  # Unibet Rose Rockets (Tour de Tietema)
+  - UC6I0KzAD7uFTL1qzxyunkvA  # Blacktail Studio

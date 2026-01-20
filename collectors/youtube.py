@@ -19,8 +19,8 @@ from googleapiclient.discovery import build
 load_dotenv()
 
 
-def load_channels() -> List[Dict[str, str]]:
-    """Load channel configuration from channels.yaml."""
+def load_channels() -> List[str]:
+    """Load channel IDs from channels.yaml."""
     with open('channels.yaml', 'r') as f:
         config = yaml.safe_load(f)
     return config['channels']
@@ -54,6 +54,23 @@ def parse_duration(duration: str) -> Optional[int]:
     seconds = int(match.group(3) or 0)
 
     return hours * 3600 + minutes * 60 + seconds
+
+
+def get_channel_name(youtube, channel_id: str) -> str:
+    """Fetch channel name from YouTube API."""
+    try:
+        response = youtube.channels().list(
+            part='snippet',
+            id=channel_id
+        ).execute()
+
+        if response['items']:
+            return response['items'][0]['snippet']['title']
+        else:
+            return f"Unknown Channel ({channel_id})"
+    except Exception as e:
+        print(f"   ⚠️  Warning: Could not fetch name for {channel_id}: {e}")
+        return f"Channel {channel_id}"
 
 
 def get_channel_uploads_playlist_id(channel_id: str) -> str:
@@ -188,9 +205,9 @@ def main():
     total_new = 0
     total_skipped = 0
 
-    for channel in channels:
-        channel_id = channel['id']
-        channel_name = channel['name']
+    for channel_id in channels:
+        # Fetch channel name from YouTube API
+        channel_name = get_channel_name(youtube, channel_id)
 
         print(f"📡 Processing: {channel_name}")
 
